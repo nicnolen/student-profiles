@@ -1,0 +1,26 @@
+{
+  "name": "student-profiles",
+  "version": "1.0.0",
+  "description": "A skills assessment for Hatchways",
+  "main": "client/App.js",
+  "scripts": {
+    "start": "cd client && npm start",
+    "install": "cd client && npm i",
+    "build": "cd client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicnolen/student-profiles.git"
+  },
+  "keywords": [
+    "student",
+    "profile",
+    "Hatchways"
+  ],
+  "author": "Nicholas Nolen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicnolen/student-profiles/issues"
+  },
+  "homepage": "https://github.com/nicnolen/student-profiles#readme"
+}

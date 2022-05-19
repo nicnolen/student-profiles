@@ -56,20 +56,7 @@ const Students = () => {
 
   return (
     <div>
-      {students.map(student => {
-        return (
-          <ul key={student.id}>
-            <li>{student.pic}</li>
-            <li>
-              {student.firstName} {student.lastName}
-            </li>
-            <li>{student.email}</li>
-            <li>{student.company}</li>
-            <li>{student.skill}</li>
-            <li>{student.grades}</li>
-          </ul>
-        );
-      })}
+     
     </div>
   );
 };

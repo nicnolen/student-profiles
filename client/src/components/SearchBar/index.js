@@ -31,6 +31,7 @@ const SearchBar = () => {
         onChange={event => {
           setInput(event.target.value);
         }}
+        className="nameInput"
       />
       {students
         /* eslint-disable-next-line */

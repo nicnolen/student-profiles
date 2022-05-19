@@ -23,22 +23,6 @@ const SearchBar = () => {
     fetchData();
   }, []);
 
-  const filteredStudent = () => {
-    return students && input !== ''
-      ? students.filter(
-          student =>
-            student.firstName[0].startsWith(input.toLowerCase()) ||
-            student.lastName.startsWith(input.toLowerCase())
-        )
-      : students;
-  };
-
-  // OTHER PART OF FILTER FUNCTION
-  // else if (
-  //   student.lastName.toLowerCase().includes(input.toLowerCase())
-  // ) {
-  //   return student;
-  // }
   return (
     <div>
       <input

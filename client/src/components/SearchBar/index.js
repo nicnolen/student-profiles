@@ -120,13 +120,17 @@ const SearchBar = () => {
                   <li className="studentInfo">{student.company}</li>
                   <li className="studentInfo">{student.skill}</li>
                   <li className="studentInfo studentGrades">
-                    {allGrades ? studentGradeAverage() : studentGradesArr()}
+                    {allGrades ? studentGradesArr() : studentGradeAverage()}
                   </li>
                 </ul>
               </div>
 
               <button onClick={toggle} className="toggle">
-                <FontAwesomeIcon icon={faPlus} />
+                {allGrades ? (
+                  <FontAwesomeIcon icon={faMinus} />
+                ) : (
+                  <FontAwesomeIcon icon={faPlus} />
+                )}
               </button>
             </div>
           );

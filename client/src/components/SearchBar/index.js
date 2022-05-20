@@ -23,6 +23,26 @@ const SearchBar = () => {
     fetchData();
   }, []);
 
+  // get the grades array
+  const studentGrades = students.map(student => {
+    return student.grades;
+  });
+
+  const studentGradeAverage = () => {
+    let gradeAverage = [];
+    // get the grades from each array
+    for (const grade of studentGrades) {
+      const studentAverage =
+        grade.reduce((a, b) => a + parseInt(b), 0) / grade.length;
+      gradeAverage.push(studentAverage);
+    }
+    return gradeAverage;
+  };
+
+  console.log(studentGradeAverage())
+
+ 
+
   return (
     <div>
       <input
@@ -59,7 +79,7 @@ const SearchBar = () => {
                   <li className="studentInfo">{student.email}</li>
                   <li className="studentInfo">{student.company}</li>
                   <li className="studentInfo">{student.skill}</li>
-                  <li className="studentInfo">{student.grades}</li>
+                  <li className="studentInfo">{studentGradeAverage()}</li>
                 </ul>
               </div>
             </div>

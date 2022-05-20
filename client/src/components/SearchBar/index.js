@@ -103,7 +103,7 @@ const SearchBar = () => {
                   {tags.map((tag, index) => (
                     <ul>
                       <li key={index}>
-                        <span>{tag}</span>
+                        <span className="tag">{tag}</span>
                       </li>
                     </ul>
                   ))}

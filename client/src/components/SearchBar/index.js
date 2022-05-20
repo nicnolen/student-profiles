@@ -28,20 +28,50 @@ const SearchBar = () => {
     return student.grades;
   });
 
+  console.log(studentGrades);
+
+  //! FIX THESE
   const studentGradeAverage = () => {
-    let gradeAverage = [];
+    let gradeAverage = 0;
     // get the grades from each array
     for (const grade of studentGrades) {
       const studentAverage =
         grade.reduce((a, b) => a + parseInt(b), 0) / grade.length;
-      gradeAverage.push(studentAverage);
+      gradeAverage += studentAverage;
     }
     return gradeAverage;
   };
 
-  console.log(studentGradeAverage())
+  const studentGradesArr = () => {
+    let grades = [];
 
- 
+    for (let i = 0; i < studentGrades.length; i++) {
+      const gradesArr = studentGrades[i];
+      console.log(gradesArr);
+      for (let i = 0; i < gradesArr.length; i++) {
+        const grade = gradesArr[i];
+        // console.log(grade)
+        // grades.push
+      }
+    }
+    console.log(grades);
+    return grades;
+  };
+
+  console.log(studentGradesArr());
+
+  // const studentGradeAverage = () => {
+  //   let gradeAverage = [];
+  //   // get the grades from each array
+  //   for (const grade of studentGrades) {
+  //     const studentAverage =
+  //       grade.reduce((a, b) => a + parseInt(b), 0) / grade.length;
+  //     gradeAverage.push(studentAverage);
+  //   }
+  //   return gradeAverage;
+  // };
+
+  console.log(studentGradeAverage());
 
   return (
     <div>
@@ -74,7 +104,7 @@ const SearchBar = () => {
               <div className="studentText">
                 <ul>
                   <li className="studentName">
-                    {student.firstName} {student.lastName}
+                    {student.firstName.toUpperCase()} {student.lastName.toUpperCase()}
                   </li>
                   <li className="studentInfo">{student.email}</li>
                   <li className="studentInfo">{student.company}</li>

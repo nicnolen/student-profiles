@@ -36,21 +36,7 @@ const SearchBar = () => {
 
   //! FIX THESE
 
-  const studentGradesArr = () => {
-    let grades = [];
-
-    for (let i = 0; i < studentGrades.length; i++) {
-      const gradesArr = studentGrades[i];
-      console.log(gradesArr);
-      for (let i = 0; i < gradesArr.length; i++) {
-        const grade = gradesArr[i];
-        // console.log(grade)
-        grades.push(grade);
-      }
-    }
-    console.log(grades);
-    return grades;
-  };
+  const studentGradesArr = () => {};
 
   // console.log(studentGradesArr());
 
@@ -70,13 +56,9 @@ const SearchBar = () => {
   };
 
   const addTags = event => {
-    if (event.key !== 'Enter') return;
-    // Get the value of the input
-    const value = event.target.value;
-    // If the value is empty, return
-    if (!value.trim()) return;
+    if (event.key !== 'Enter' && event.target.value !== '') return;
     // Add the value to the tags array
-    setTags([...tags, value]);
+    setTags([...tags, event.target.value]);
     // Clear the input
     event.target.value = '';
   };
@@ -119,36 +101,38 @@ const SearchBar = () => {
               </div>
 
               <div className="studentText">
-                <ul>
-                  <li className="studentName">
-                    {student.firstName.toUpperCase()}{' '}
-                    {student.lastName.toUpperCase()}
-                  </li>
-                  <li className="studentInfo">{student.email}</li>
-                  <li className="studentInfo">{student.company}</li>
-                  <li className="studentInfo">{student.skill}</li>
-                  <li className="studentInfo studentGrades">
-                    {allGrades
-                      ? studentGradesArr()
-                      : student.grades.reduce((a, b) => parseInt(b) + a, 0) /
-                          student.grades.map(grade => grade).length +
-                        '%'}
-                  </li>
-                  <li>
-                    {tags.map((tag, index) => (
-                      <div key={index}>
-                        <span>{tag}</span>
-                      </div>
-                    ))}
+                <p className="studentName">
+                  {student.firstName.toUpperCase()}{' '}
+                  {student.lastName.toUpperCase()}
+                </p>
+                <p className="studentInfo">{student.email}</p>
+                <p className="studentInfo">{student.company}</p>
+                <p className="studentInfo">{student.skill}</p>
+                <p className="studentInfo studentGrades">
+                  {allGrades
+                    ? student.grades.map((grade, index) => (
+                        <li className="li" key={grade.id}>
+                          Test {index + 1}: {grade}%
+                        </li>
+                      ))
+                    : student.grades.reduce((a, b) => parseInt(b) + a, 0) /
+                        student.grades.map(grade => grade).length +
+                      '%'}
+                </p>
+                <p>
+                  {tags.map((tag, index) => (
+                    <li key={index}>
+                      <span>{tag}</span>
+                    </li>
+                  ))}
 
-                    <input
-                      type="text"
-                      placeholder="Add a tag"
-                      onKeyUp={event => addTags(event)}
-                      className="tagInput"
-                    />
-                  </li>
-                </ul>
+                  <input
+                    type="text"
+                    placeholder="Add a tag"
+                    onKeyUp={event => addTags(event)}
+                    className="tagInput"
+                  />
+                </p>
               </div>
 
               <button onClick={toggle} className="toggle">

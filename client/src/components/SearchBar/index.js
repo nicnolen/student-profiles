@@ -88,7 +88,10 @@ const SearchBar = () => {
             return student;
           } else if (
             student.firstName.toLowerCase().includes(input.toLowerCase()) ||
-            student.lastName.toLowerCase().includes(input.toLowerCase())
+            student.lastName.toLowerCase().includes(input.toLowerCase()) ||
+            (student.firstName + ' ' + student.lastName)
+              .toLowerCase()
+              .includes(input.toLowerCase())
           ) {
             return student;
           }
@@ -119,7 +122,7 @@ const SearchBar = () => {
                         student.grades.map(grade => grade).length +
                       '%'}
                 </p>
-                <p>
+                <p className="studentTags">
                   {tags.map((tag, index) => (
                     <li key={index}>
                       <span>{tag}</span>

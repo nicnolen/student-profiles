@@ -35,16 +35,6 @@ const SearchBar = () => {
   console.log(studentGrades);
 
   //! FIX THESE
-  const studentGradeAverage = () => {
-    let gradeAverage = 0;
-    // get the grades from each array
-    for (const grade of studentGrades) {
-      const studentAverage =
-        grade.reduce((a, b) => a + parseInt(b), 0) / grade.length;
-      gradeAverage += studentAverage;
-    }
-    return gradeAverage;
-  };
 
   const studentGradesArr = () => {
     let grades = [];
@@ -74,8 +64,6 @@ const SearchBar = () => {
   //   }
   //   return gradeAverage;
   // };
-
-  console.log(studentGradeAverage());
 
   const toggle = () => {
     setAllGrades(!allGrades);
@@ -140,7 +128,11 @@ const SearchBar = () => {
                   <li className="studentInfo">{student.company}</li>
                   <li className="studentInfo">{student.skill}</li>
                   <li className="studentInfo studentGrades">
-                    {allGrades ? studentGradesArr() : studentGradeAverage()}
+                    {allGrades
+                      ? studentGradesArr()
+                      : student.grades.reduce((a, b) => parseInt(b) + a, 0) /
+                          student.grades.map(grade => grade).length +
+                        '%'}
                   </li>
                   <li>
                     {tags.map((tag, index) => (

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const SearchBar = () => {
   const [students, setStudents] = useState([]);
-  const studentsUrl = 'https://api.hatchways.io/assessment/students';
   const [input, setInput] = useState('');
+  const [allGrades, setAllGrades] = useState(false);
+
+  const studentsUrl = 'https://api.hatchways.io/assessment/students';
 
   const fetchData = async () => {
     try {
@@ -51,14 +55,14 @@ const SearchBar = () => {
       for (let i = 0; i < gradesArr.length; i++) {
         const grade = gradesArr[i];
         // console.log(grade)
-        // grades.push
+        grades.push(grade);
       }
     }
     console.log(grades);
     return grades;
   };
 
-  console.log(studentGradesArr());
+  // console.log(studentGradesArr());
 
   // const studentGradeAverage = () => {
   //   let gradeAverage = [];
@@ -72,6 +76,10 @@ const SearchBar = () => {
   // };
 
   console.log(studentGradeAverage());
+
+  const toggle = () => {
+    setAllGrades(!allGrades);
+  };
 
   return (
     <div>
@@ -101,17 +109,25 @@ const SearchBar = () => {
               <div className="studentPic">
                 <img src={student.pic} alt="student profile" />
               </div>
+
               <div className="studentText">
                 <ul>
                   <li className="studentName">
-                    {student.firstName.toUpperCase()} {student.lastName.toUpperCase()}
+                    {student.firstName.toUpperCase()}{' '}
+                    {student.lastName.toUpperCase()}
                   </li>
                   <li className="studentInfo">{student.email}</li>
                   <li className="studentInfo">{student.company}</li>
                   <li className="studentInfo">{student.skill}</li>
-                  <li className="studentInfo">{studentGradeAverage()}</li>
+                  <li className="studentInfo studentGrades">
+                    {allGrades ? studentGradeAverage() : studentGradesArr()}
+                  </li>
                 </ul>
               </div>
+
+              <button onClick={toggle} className="toggle">
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
             </div>
           );
         })}

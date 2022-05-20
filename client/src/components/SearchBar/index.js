@@ -27,30 +27,6 @@ const SearchBar = () => {
     fetchData();
   }, []);
 
-  // get the grades array
-  const studentGrades = students.map(student => {
-    return student.grades;
-  });
-
-  console.log(studentGrades);
-
-  //! FIX THESE
-
-  const studentGradesArr = () => {};
-
-  // console.log(studentGradesArr());
-
-  // const studentGradeAverage = () => {
-  //   let gradeAverage = [];
-  //   // get the grades from each array
-  //   for (const grade of studentGrades) {
-  //     const studentAverage =
-  //       grade.reduce((a, b) => a + parseInt(b), 0) / grade.length;
-  //     gradeAverage.push(studentAverage);
-  //   }
-  //   return gradeAverage;
-  // };
-
   const toggle = () => {
     setAllGrades(!allGrades);
   };
@@ -108,9 +84,9 @@ const SearchBar = () => {
                   {student.firstName.toUpperCase()}{' '}
                   {student.lastName.toUpperCase()}
                 </p>
-                <p className="studentInfo">{student.email}</p>
-                <p className="studentInfo">{student.company}</p>
-                <p className="studentInfo">{student.skill}</p>
+                <p className="studentInfo">Email: {student.email}</p>
+                <p className="studentInfo">Company: {student.company}</p>
+                <p className="studentInfo">Skill: {student.skill}</p>
                 <p className="studentInfo studentGrades">
                   {allGrades
                     ? student.grades.map((grade, index) => (
@@ -118,15 +94,18 @@ const SearchBar = () => {
                           Test {index + 1}: {grade}%
                         </li>
                       ))
-                    : student.grades.reduce((a, b) => parseInt(b) + a, 0) /
+                    : 'Average: ' +
+                      student.grades.reduce((a, b) => parseInt(b) + a, 0) /
                         student.grades.map(grade => grade).length +
                       '%'}
                 </p>
                 <p className="studentTags">
                   {tags.map((tag, index) => (
-                    <li key={index}>
-                      <span>{tag}</span>
-                    </li>
+                    <ul>
+                      <li key={index}>
+                        <span>{tag}</span>
+                      </li>
+                    </ul>
                   ))}
 
                   <input

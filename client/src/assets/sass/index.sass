@@ -6,10 +6,18 @@ body
 li
   list-style: none
 
-.nameInput
-  width: 100%
+input
   border: none
+
+.nameSearchInput, .tagSearchInput
+  width: 100%
   padding: 10px
+
+.nameSearchInput
+  border-bottom: 3px solid lightGray
+
+.tagInput
+  margin-left: 40px
 
 .container
   display: flex
@@ -53,4 +61,8 @@ img
   display: block
 
 .toggle
-  justify-content: flex-end
+  background: none
+  border: none
+  color: #bfbfbf
+  &:hover
+    color: black

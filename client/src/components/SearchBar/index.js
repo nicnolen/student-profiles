@@ -6,7 +6,7 @@ const SearchBar = () => {
   const [students, setStudents] = useState([]);
   const [input, setInput] = useState('');
   const [allGrades, setAllGrades] = useState(false);
-
+  const [tags, setTags] = React.useState([]);
   const studentsUrl = 'https://api.hatchways.io/assessment/students';
 
   const fetchData = async () => {
@@ -81,15 +81,35 @@ const SearchBar = () => {
     setAllGrades(!allGrades);
   };
 
+  const addTags = event => {
+    if (event.key !== 'Enter') return;
+    // Get the value of the input
+    const value = event.target.value;
+    // If the value is empty, return
+    if (!value.trim()) return;
+    // Add the value to the tags array
+    setTags([...tags, value]);
+    // Clear the input
+    event.target.value = '';
+  };
+
   return (
     <div>
       <input
         type="text"
-        placeholder="Search Name"
+        placeholder="Search by name"
         onChange={event => {
           setInput(event.target.value);
         }}
-        className="nameInput"
+        className="nameSearchInput"
+      />
+      <input
+        type="text"
+        placeholder="Search by tag"
+        onChange={event => {
+          setInput(event.target.value);
+        }}
+        className="tagSearchInput"
       />
       {students
         /* eslint-disable-next-line */
@@ -121,6 +141,20 @@ const SearchBar = () => {
                   <li className="studentInfo">{student.skill}</li>
                   <li className="studentInfo studentGrades">
                     {allGrades ? studentGradesArr() : studentGradeAverage()}
+                  </li>
+                  <li>
+                    {tags.map((tag, index) => (
+                      <div key={index}>
+                        <span>{tag}</span>
+                      </div>
+                    ))}
+
+                    <input
+                      type="text"
+                      placeholder="Add a tag"
+                      onKeyUp={event => addTags(event)}
+                      className="tagInput"
+                    />
                   </li>
                 </ul>
               </div>

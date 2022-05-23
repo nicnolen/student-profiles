@@ -101,8 +101,8 @@ const SearchBar = () => {
                 </p>
                 <p className="studentTags">
                   {tags.map((tag, index) => (
-                    <ul>
-                      <li key={index}>
+                    <ul key={index}>
+                      <li>
                         <span className="tag">{tag}</span>
                       </li>
                     </ul>

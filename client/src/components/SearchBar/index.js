@@ -31,12 +31,13 @@ const SearchBar = () => {
     setAllGrades(!allGrades);
   };
 
-  const addTags = event => {
-    if (event.key !== 'Enter' && event.target.value !== '') return;
-    // Add the value to the tags array
-    setTags([...tags, event.target.value]);
-    // Clear the input
-    event.target.value = '';
+  const addTags = (studentId, event) => {
+    if (event.key === 'Enter' && event.target.value !== '') {
+      // Add the value to the tags array
+      setTags([...tags, { studentId, value: event.target.value }]);
+      // Clear the input
+      event.target.value = '';
+    }
   };
 
   return (
@@ -100,18 +101,20 @@ const SearchBar = () => {
                       '%'}
                 </p>
                 <p className="studentTags">
-                  {tags.map((tag, index) => (
-                    <ul key={index}>
-                      <li>
-                        <span className="tag">{tag}</span>
-                      </li>
-                    </ul>
-                  ))}
+                  {tags
+                    .filter(tag => tag.studentId === student.id)
+                    .map(tag => (
+                      <ul>
+                        <li>
+                          <span className="tag">{tag.value}</span>
+                        </li>
+                      </ul>
+                    ))}
 
                   <input
                     type="text"
                     placeholder="Add a tag"
-                    onKeyUp={event => addTags(event)}
+                    onKeyDown={addTags.bind(this, student.id)}
                     className="tagInput"
                   />
                 </p>

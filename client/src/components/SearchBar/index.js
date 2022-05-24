@@ -7,10 +7,10 @@ const SearchBar = () => {
   const [students, setStudents] = useState([]);
   const [filterStudents, setFilterStudents] = useState([]);
   const [input, setInput] = useState('');
-  const [tagInput, setTagInput] = useState([]);
+  const [tagSearch, setTagSearch] = useState([]);
   const [allGrades, setAllGrades] = useState(false);
   const [tags, setTags] = useState([]);
-  const [tag, setTag] = useState([]);
+  const [tag, setTag] = useState('');
 
   const studentsUrl = 'https://api.hatchways.io/assessment/students';
 
@@ -31,34 +31,6 @@ const SearchBar = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  useEffect(() => {
-    // Array.filter() is perfect for this situation //
-    const filteredStudentsByNameAndTag = students.filter(student => {
-      const firstName = student.firstName.toLowerCase();
-      const lastName = student.lastName.toLowerCase();
-      const fullName = firstName + lastName;
-      const studentTags = [];
-
-      // if ('tags' in student) {
-      //   const filterTags = tags.filter(tag =>
-      //     tag.value.toLowerCase().includes(input.toLowerCase())
-      //   );
-      //   studentTags.push(filterTags);
-      // }
-
-      return fullName.includes(input.toLowerCase());
-      // studentTags.includes(tagInput.toLowerCase())
-    });
-
-    setFilterStudents(filteredStudentsByNameAndTag);
-  }, [input, tagInput]);
-
-  console.log(filterStudents);
-
-  const toggle = () => {
-    setAllGrades(!allGrades);
-  };
 
   const handleTagAdded = (tag, studentId) => {
     setStudents(prevStudents => {
@@ -86,10 +58,38 @@ const SearchBar = () => {
     });
   };
 
+  useEffect(() => {
+    // Array.filter() is perfect for this situation //
+    const filteredStudentsByNameAndTag = students.filter(student => {
+      const firstName = student.firstName.toLowerCase();
+      const lastName = student.lastName.toLowerCase();
+      const fullName = firstName + + '' + lastName;
+      const studentTags = [];
+
+      // if ('tags' in student) {
+      //   const filterTags = handleTagAdded();
+      //   studentTags.push(filterTags);
+      // }
+
+      return fullName.includes(input.toLowerCase());
+      // studentTags.includes(tagSearch.toLowerCase())
+    });
+
+    setFilterStudents(filteredStudentsByNameAndTag);
+  }, [input, tagSearch]);
+
+  console.log(filterStudents);
+
+  const toggle = () => {
+    setAllGrades(!allGrades);
+  };
+
   const onKeyPress = (studentId, event) => {
+
     if (event.key === 'Enter' && event.target.value !== '') {
       // Add the value to the tags array
       setTags([...tags, { studentId, value: event.target.value }]);
+
       // Clear the input
       setTag('');
 
@@ -111,7 +111,7 @@ const SearchBar = () => {
         type="text"
         placeholder="Search by tag"
         onChange={event => {
-          setTagInput(event.target.value);
+          setTagSearch(event.target.value);
         }}
         className="tagSearchInput"
       />

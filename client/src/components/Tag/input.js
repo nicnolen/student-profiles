@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Tag = ({ studentId, tag, tags, onChange, onKeyPress }) => {
+  console.log(tag);
   return (
     <div>
       {tags.length > 0 && (
@@ -19,7 +20,7 @@ const Tag = ({ studentId, tag, tags, onChange, onKeyPress }) => {
         value={tag}
         placeholder="Add a tag"
         key="tag-input"
-        onKeyPress={onKeyPress.bind(tag, studentId)}
+        onKeyPress={onKeyPress.bind(tags, studentId)}
         onChange={onChange}
       />
     </div>

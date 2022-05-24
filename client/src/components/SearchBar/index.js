@@ -47,18 +47,14 @@ const SearchBar = () => {
       //   studentTags.push(filterTags);
       // }
 
-      return (
-        fullName.includes(input.toLowerCase())
-        // studentTags.includes(tagInput.toLowerCase())
-      );
+      return fullName.includes(input.toLowerCase());
+      // studentTags.includes(tagInput.toLowerCase())
     });
 
     setFilterStudents(filteredStudentsByNameAndTag);
   }, [input, tagInput]);
 
   console.log(filterStudents);
-
-
 
   const toggle = () => {
     setAllGrades(!allGrades);
@@ -95,7 +91,7 @@ const SearchBar = () => {
       // Add the value to the tags array
       setTags([...tags, { studentId, value: event.target.value }]);
       // Clear the input
-      event.target.value = '';
+      setTag('');
 
       handleTagAdded(tag, studentId);
     }
@@ -151,6 +147,7 @@ const SearchBar = () => {
                 onKeyPress={onKeyPress}
                 tags={tags}
                 tag={tag}
+                studentId={student.id}
               />
             </div>
 

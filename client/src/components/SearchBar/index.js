@@ -63,7 +63,7 @@ const SearchBar = () => {
     const filteredStudentsByNameAndTag = students.filter(student => {
       const firstName = student.firstName.toLowerCase();
       const lastName = student.lastName.toLowerCase();
-      const fullName = firstName + + '' + lastName;
+      const fullName = firstName +  ' ' + lastName;
       const studentTags = [];
 
       // if ('tags' in student) {

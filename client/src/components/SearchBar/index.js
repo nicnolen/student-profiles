@@ -76,7 +76,7 @@ const SearchBar = () => {
     });
 
     setFilterStudents(filteredStudentsByNameAndTag);
-  }, [input, tagSearch]);
+  }, [students, input, tagSearch]);
 
   console.log(filterStudents);
 

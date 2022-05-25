@@ -22,18 +22,15 @@ input
 
 .tag
   background: lightGray
-  
 
 .container
   display: flex
-  align-items: center
-  justify-content: flex-start
   border-top: 3px solid lightGray
-  padding: 30px
+  padding: 20px 30px 0 0
 
-.student-pic
-  flex-basis: 40%
-
+.studentPic
+  padding-bottom: 20px
+  
 img
   max-width: 100%
   background: white
@@ -43,10 +40,6 @@ img
   border-style: solid
   border-width: thin
   border-color: #bfbfbf
-
-.text
-  font-size: 20px
-  padding-left: 20px
 
 .studentName
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@700&family=Staatliches&display=swap')
@@ -64,6 +57,7 @@ img
   font-family: 'Staatliches', cursive
   margin: 0px 0px 0px 80px
   padding: 0
+  font-size: 20px
 
 .studentTags
   margin: 0px 0px 0px 40px
@@ -71,9 +65,18 @@ img
 .studentGrades
   display: block
 
-.toggle
+.studentNameAndBtn
+  display: flex
+  justify-content: space-between
+  flex-basis: 80%
+
+.toggleGrades
   background: none
   border: none
   color: #bfbfbf
   &:hover
     color: black
+
+.icons
+  width: 10%
+  height: auto

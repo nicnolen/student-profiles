@@ -47,14 +47,16 @@ const SearchBar = () => {
 
       // Add new tag to array
       changedStudent.tags.push(tag);
+      // console.log(changedStudent.tags);
 
       // Copy array so we can change it
-      const mutatableStudents = [...prevStudents];
-      mutatableStudents[studentId] = changedStudent;
+      const mutableStudents = [...prevStudents];
+      mutableStudents[studentId] = changedStudent;
+      // console.log(mutableStudents[studentId]);
 
       // The state will be set to this array with the student
       // at the index we were given changed
-      return mutatableStudents;
+      return mutableStudents;
     });
   };
 
@@ -63,11 +65,13 @@ const SearchBar = () => {
     const filteredStudentsByNameAndTag = students.filter(student => {
       const firstName = student.firstName.toLowerCase();
       const lastName = student.lastName.toLowerCase();
-      const fullName = firstName +  ' ' + lastName;
-      const studentTags = [];
+      const fullName = firstName + ' ' + lastName;
+      // const studentTags = [];
 
-      // if ('tags' in student) {
-      //   const filterTags = handleTagAdded();
+      // if (tags in student) {
+      //   const filterTags = tags.filter(tag => {
+      //     return students.tag;
+      //   });
       //   studentTags.push(filterTags);
       // }
 
@@ -78,14 +82,24 @@ const SearchBar = () => {
     setFilterStudents(filteredStudentsByNameAndTag);
   }, [students, input, tagSearch]);
 
-  console.log(filterStudents);
+  // console.log(filterStudents);
+
+  // const filterTags = event => {
+  //   setTagSearch(event.target.value);
+  //   if (students.tags) {
+  //     const filteredStudentTags = students.filter(student => {
+  //       return student.tags.includes(tagSearch);
+  //     });
+  //     // console.log(filteredStudentTags());
+  //     return filteredStudentTags;
+  //   }
+  // };
 
   const toggle = () => {
     setAllGrades(!allGrades);
   };
 
   const onKeyPress = (studentId, event) => {
-
     if (event.key === 'Enter' && event.target.value !== '') {
       // Add the value to the tags array
       setTags([...tags, { studentId, value: event.target.value }]);
@@ -118,46 +132,52 @@ const SearchBar = () => {
       {filterStudents.map(student => {
         return (
           <div className="container" key={student.id}>
-            <div className="studentPic">
-              <img src={student.pic} alt="student profile" />
-            </div>
-
-            <div className="studentText">
-              <p className="studentName">
-                {student.firstName.toUpperCase()}{' '}
-                {student.lastName.toUpperCase()}
-              </p>
-              <p className="studentInfo">Email: {student.email}</p>
-              <p className="studentInfo">Company: {student.company}</p>
-              <p className="studentInfo">Skill: {student.skill}</p>
-              <p className="studentInfo studentGrades">
-                {allGrades
-                  ? student.grades.map((grade, index) => (
-                      <li className="li" key={grade.id}>
-                        Test {index + 1}: {grade}%
-                      </li>
-                    ))
-                  : 'Average: ' +
-                    student.grades.reduce((a, b) => parseInt(b) + a, 0) /
-                      student.grades.map(grade => grade).length +
-                    '%'}
-              </p>
-              <Tag
-                onChange={event => setTag(event.target.value)}
-                onKeyPress={onKeyPress}
-                tags={tags}
-                tag={tag}
-                studentId={student.id}
+            <figure className="studentPic">
+              <img
+                src={student.pic}
+                alt={student.firstName + ' ' + student.lastName}
               />
-            </div>
+            </figure>
+            <div className="studentProfile">
+              <div className="studentNameAndBtn">
+                <h1 className="studentName">
+                  {student.firstName.toUpperCase()}{' '}
+                  {student.lastName.toUpperCase()}
+                </h1>
+                <button onClick={toggle} className="toggleGrades">
+                  {allGrades ? (
+                    <FontAwesomeIcon icon={faMinus} />
+                  ) : (
+                    <FontAwesomeIcon icon={faPlus} />
+                  )}
+                </button>
+              </div>
 
-            <button onClick={toggle} className="toggle">
-              {allGrades ? (
-                <FontAwesomeIcon icon={faMinus} />
-              ) : (
-                <FontAwesomeIcon icon={faPlus} />
-              )}
-            </button>
+              <div className="studentTextContainer">
+                <p className="studentInfo">Email: {student.email}</p>
+                <p className="studentInfo">Company: {student.company}</p>
+                <p className="studentInfo">Skill: {student.skill}</p>
+                <p className="studentInfo studentGrades">
+                  {allGrades
+                    ? student.grades.map((grade, index) => (
+                        <li className="li" key={grade.id}>
+                          Test {index + 1}: {grade}%
+                        </li>
+                      ))
+                    : 'Average: ' +
+                      student.grades.reduce((a, b) => parseInt(b) + a, 0) /
+                        student.grades.map(grade => grade).length +
+                      '%'}
+                </p>
+                <Tag
+                  onChange={event => setTag(event.target.value)}
+                  onKeyPress={onKeyPress}
+                  tags={tags}
+                  tag={tag}
+                  studentId={student.id}
+                />
+              </div>
+            </div>
           </div>
         );
       })}

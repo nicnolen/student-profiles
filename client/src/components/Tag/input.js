@@ -4,12 +4,12 @@ const Tag = ({ studentId, tag, tags, onChange, onKeyPress }) => {
   return (
     <div>
       {tags.length > 0 && (
-        <div>
+        <div class="tagContainer">
           {tags
             .filter(t => t.studentId === studentId)
             .map((tag, index) => (
               <span key={index} className="tag">
-                {tag.value}{' '}
+                {tag.value}
               </span>
             ))}
         </div>
@@ -20,6 +20,7 @@ const Tag = ({ studentId, tag, tags, onChange, onKeyPress }) => {
         placeholder="Add a tag"
         onKeyPress={onKeyPress.bind(tags, studentId)}
         onChange={onChange}
+        className="studentInfo tagInput"
       />
     </div>
   );

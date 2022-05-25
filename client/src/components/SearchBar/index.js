@@ -84,16 +84,17 @@ const SearchBar = () => {
 
   // console.log(filterStudents);
 
-  // const filterTags = event => {
-  //   setTagSearch(event.target.value);
-  //   if (students.tags) {
-  //     const filteredStudentTags = students.filter(student => {
-  //       return student.tags.includes(tagSearch);
-  //     });
-  //     // console.log(filteredStudentTags());
-  //     return filteredStudentTags;
-  //   }
-  // };
+  const filterTags = event => {
+    // setTagSearch(event.target.value);
+    if (students.tags) {
+      const filteredStudentTags = students.filter(student => {
+        return student.tags.includes(tagSearch);
+      });
+      // console.log(filteredStudentTags());
+      return filteredStudentTags;
+    }
+  };
+  console.log(filterTags);
 
   const toggle = () => {
     setAllGrades(!allGrades);

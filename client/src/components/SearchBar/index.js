@@ -155,16 +155,18 @@ const SearchBar = () => {
                 <p className="studentInfo">Company: {student.company}</p>
                 <p className="studentInfo">Skill: {student.skill}</p>
                 <p className="studentInfo studentGrades">
+                  Average:
+                  {' ' +
+                    student.grades.reduce((a, b) => parseInt(b) + a, 0) /
+                      student.grades.map(grade => grade).length +
+                    '%'}
                   {allGrades
                     ? student.grades.map((grade, index) => (
                         <li className="li" key={grade.id}>
                           Test {index + 1}: {grade}%
                         </li>
                       ))
-                    : 'Average: ' +
-                      student.grades.reduce((a, b) => parseInt(b) + a, 0) /
-                        student.grades.map(grade => grade).length +
-                      '%'}
+                    : null}
                 </p>
                 <Tag
                   onChange={event => setTagInput(event.target.value)}

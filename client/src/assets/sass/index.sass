@@ -1,5 +1,12 @@
 @import './_variables'
+@import './_mediaQueries'
+@import './_nameSearch'
+@import './_studentInfo'
+@import './_gradeToggle'
+@import './_tag'
 
+html, body
+  width: 100vw
 body
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@700&family=Staatliches&display=swap')
   margin: 0
@@ -13,96 +20,7 @@ input
   border: none
   outline: none
 
-.nameSearchInput, .tagSearchInput
-  width: 100%
-  border: none
-  padding: 10px 5px
-  font-size: 1.1rem
-  line-height: 200%
-
-.nameSearchInput
-  border-bottom: 3px solid $light_gray
-
-.tagInput
-  margin-left: 40px
-  border-bottom: 3px solid $light_gray
-  &:focus
-    border-bottom: 3px solid $gray
-
-.tag
-  background: $tag_gray
-
-.container
-  display: flex
-  border-top: 3px solid $light_gray
-  padding: 20px 30px 0 0
-  justify-content: flex-start
-  width: 100%
-  flex-direction: row
-
-.studentPic
-  padding-bottom: 20px
-
-img
-  max-width: 100%
-  background: white
-  width: 200px
-  height: 200px
-  border-radius: 50%
-  border-style: solid
-  border-width: thin
-  border-color: #bfbfbf
-
-.studentName
-  font-family: 'Raleway', sans-serif
-  font-size: 50px
-  margin: 0px 0px 0px 40px
-  padding: 0
-
-.studentInfo
-  font-family: 'Raleway', serif
-  color: $text_gray
-  margin: 0px 0px 0px 70px
-  padding: 0
-  font-size: 20px
-
-.tagContainer
-  font-family: 'Raleway', sans-serif
-  margin: 0
-  padding: 0
-
-.tag
-  font-family: 'Raleway', sans-serif
-  margin: 10px -75px 10px 70px
-  padding: 10px
-  width: 200px
-  height: 150px
-
-.tagInput
-  font-family: 'Raleway', sans-serif
-  margin: 20px auto 40px 70px
-
-.studentGrades
-  display: block
-  margin-bottom: 10px
-
-.studentNameContainer
-  display: flex
-  justify-content: space-between
-  flex-basis: 80%
-  width: 100%
-
 .right
   margin-left: auto
 
-.toggleGrades
-  font-size: 30px
-  background: none
-  border: none
-  color: $icon_gray
-  &:hover
-    color: black
 
-.icons
-  width: 100%
-  height: auto

@@ -10,7 +10,7 @@ const SearchBar = () => {
   const [tagSearch, setTagSearch] = useState([]);
   const [allGrades, setAllGrades] = useState(false);
   const [tags, setTags] = useState([]);
-  const [tag, setTag] = useState('');
+  const [tagInput, setTagInput] = useState('');
 
   const studentsUrl = 'https://api.hatchways.io/assessment/students';
 
@@ -34,14 +34,15 @@ const SearchBar = () => {
 
   const handleTagAdded = (tag, studentId) => {
     setStudents(prevStudents => {
+      studentId = studentId - 1;
       // We copy object here as the student we're accessing
       // is an object, and objects are always stored by reference.
       // If we didn't do this, we would be directly mutating
       // the student at the index, which is bad practice
       const changedStudent = { ...prevStudents[studentId] };
-
+      // console.log(changedStudent);
       // Check if student has 'tags` and add it if it doesn't.
-      if (!('tags' in changedStudent)) {
+      if (!(tags in changedStudent)) {
         changedStudent.tags = [];
       }
 
@@ -66,50 +67,52 @@ const SearchBar = () => {
       const firstName = student.firstName.toLowerCase();
       const lastName = student.lastName.toLowerCase();
       const fullName = firstName + ' ' + lastName;
-      // const studentTags = [];
+      const studentTags = [];
 
-      // if (tags in student) {
-      //   const filterTags = tags.filter(tag => {
-      //     return students.tag;
-      //   });
-      //   studentTags.push(filterTags);
-      // }
+      if (tags in student) {
+        const filterTags = student.tags.filter(tag => {
+          // console.log(tags);
+          tag.includes(tagSearch.toLowerCase());
+        });
+        studentTags.push(filterTags);
+      }
 
       return fullName.includes(input.toLowerCase());
-      // studentTags.includes(tagSearch.toLowerCase())
     });
 
     setFilterStudents(filteredStudentsByNameAndTag);
-  }, [students, input, tagSearch]);
+  }, [students, input, tags, tagSearch]);
 
   // console.log(filterStudents);
 
-  const filterTags = event => {
-    // setTagSearch(event.target.value);
-    if (students.tags) {
-      const filteredStudentTags = students.filter(student => {
-        return student.tags.includes(tagSearch);
-      });
-      // console.log(filteredStudentTags());
-      return filteredStudentTags;
-    }
-  };
-  console.log(filterTags);
-
-  const toggle = () => {
-    setAllGrades(!allGrades);
-  };
+  // const filterTags = event => {
+  //   // setTagSearch(event.target.value);
+  //   if (students.tags) {
+  //     const filteredStudentTags = students.filter(student => {
+  //       return student.tags.includes(tagSearch);
+  //     });
+  //     // console.log(filteredStudentTags());
+  //     return filteredStudentTags;
+  //   }
+  // };
+  // console.log(filterTags);
 
   const onKeyPress = (studentId, event) => {
     if (event.key === 'Enter' && event.target.value !== '') {
       // Add the value to the tags array
-      setTags([...tags, { studentId, value: event.target.value }]);
+      const newTagArr = [...tags, { studentId, value: event.target.value }];
 
+      setTags(newTagArr);
+      console.log(newTagArr);
       // Clear the input
-      setTag('');
+      setTagInput('');
 
-      handleTagAdded(tag, studentId);
+      // handleTagAdded(tagInput, studentId);
     }
+  };
+
+  const toggle = () => {
+    setAllGrades(!allGrades);
   };
 
   return (
@@ -171,10 +174,10 @@ const SearchBar = () => {
                       '%'}
                 </p>
                 <Tag
-                  onChange={event => setTag(event.target.value)}
+                  onChange={event => setTagInput(event.target.value)}
                   onKeyPress={onKeyPress}
                   tags={tags}
-                  tag={tag}
+                  tagInput={tagInput}
                   studentId={student.id}
                 />
               </div>

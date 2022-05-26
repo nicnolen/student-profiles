@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Tag = ({ studentId, tag, tags, onChange, onKeyPress }) => {
+const Tag = ({ studentId, tagInput, tags, onChange, onKeyPress }) => {
   return (
     <div>
       {tags.length > 0 && (
-        <div class="tagContainer">
+        <div className="tagContainer">
           {tags
             .filter(t => t.studentId === studentId)
             .map((tag, index) => (
@@ -16,7 +16,7 @@ const Tag = ({ studentId, tag, tags, onChange, onKeyPress }) => {
       )}
       <input
         type="text"
-        value={tag}
+        value={tagInput}
         placeholder="Add a tag"
         onKeyPress={onKeyPress.bind(tags, studentId)}
         onChange={onChange}

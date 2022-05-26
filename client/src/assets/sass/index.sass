@@ -1,3 +1,5 @@
+@import './_variables'
+
 body
   margin: 0
   -webkit-font-smoothing: antialiased
@@ -8,24 +10,27 @@ li
 
 input
   border: none
+  outline: none
 
 .nameSearchInput, .tagSearchInput
   width: 100%
   padding: 10px
 
 .nameSearchInput
-  border-bottom: 3px solid lightGray
+  border-bottom: 3px solid $light_gray
 
 .tagInput
   margin-left: 40px
-  border-bottom: 3px solid lightGray
+  border-bottom: 3px solid $light_gray
+  &:focus
+    border-bottom: 3px solid $gray
 
 .tag
-  background: lightGray
+  background: $tag_gray
 
 .container
   display: flex
-  border-top: 3px solid lightGray
+  border-top: 3px solid $light_gray
   padding: 20px 30px 0 0
 
 .studentPic

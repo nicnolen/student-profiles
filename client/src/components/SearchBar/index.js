@@ -143,18 +143,11 @@ const SearchBar = () => {
               />
             </figure>
             <div className="studentProfile">
-              <div className="studentNameAndBtn">
+              <div className="studentNameContainer">
                 <h1 className="studentName">
                   {student.firstName.toUpperCase()}{' '}
                   {student.lastName.toUpperCase()}
                 </h1>
-                <button onClick={toggle} className="toggleGrades">
-                  {allGrades ? (
-                    <FontAwesomeIcon icon={faMinus} />
-                  ) : (
-                    <FontAwesomeIcon icon={faPlus} />
-                  )}
-                </button>
               </div>
 
               <div className="studentTextContainer">
@@ -181,6 +174,15 @@ const SearchBar = () => {
                   studentId={student.id}
                 />
               </div>
+            </div>
+            <div className="right">
+              <button onClick={toggle} className="toggleGrades">
+                {allGrades ? (
+                  <FontAwesomeIcon icon={faMinus} />
+                ) : (
+                  <FontAwesomeIcon icon={faPlus} />
+                )}
+              </button>
             </div>
           </div>
         );

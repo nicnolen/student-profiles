@@ -1,6 +1,7 @@
 @import './_variables'
 
 body
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@700&family=Staatliches&display=swap')
   margin: 0
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
@@ -14,7 +15,10 @@ input
 
 .nameSearchInput, .tagSearchInput
   width: 100%
-  padding: 10px
+  border: none
+  padding: 10px 5px
+  font-size: 1.1rem
+  line-height: 200%
 
 .nameSearchInput
   border-bottom: 3px solid $light_gray
@@ -32,6 +36,9 @@ input
   display: flex
   border-top: 3px solid $light_gray
   padding: 20px 30px 0 0
+  justify-content: flex-start
+  width: 100%
+  flex-direction: row
 
 .studentPic
   padding-bottom: 20px
@@ -47,49 +54,52 @@ img
   border-color: #bfbfbf
 
 .studentName
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@700&family=Staatliches&display=swap')
-  font-size: 50px
-  font-family: 'Open Sans', sans-serif
   font-family: 'Raleway', sans-serif
-  font-family: 'Staatliches', cursive
+  font-size: 50px
   margin: 0px 0px 0px 40px
   padding: 0
 
 .studentInfo
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@100&family=Staatliches&display=swap')
-  font-family: 'Open Sans', sans-serif
-  font-family: 'Raleway', sans-serif
-  font-family: 'Staatliches', cursive
-  margin: 0px 0px 0px 80px
+  font-family: 'Raleway', serif
+  color: $text_gray
+  margin: 0px 0px 0px 70px
   padding: 0
   font-size: 20px
 
 .tagContainer
+  font-family: 'Raleway', sans-serif
   margin: 0
   padding: 0
 
 .tag
-  margin: 10px -75px 10px 80px
+  font-family: 'Raleway', sans-serif
+  margin: 10px -75px 10px 70px
   padding: 10px
   width: 200px
   height: 150px
 
 .tagInput
-  margin: 20px auto 40px 80px
+  font-family: 'Raleway', sans-serif
+  margin: 20px auto 40px 70px
 
 .studentGrades
   display: block
   margin-bottom: 10px
 
-.studentNameAndBtn
+.studentNameContainer
   display: flex
   justify-content: space-between
   flex-basis: 80%
+  width: 100%
+
+.right
+  margin-left: auto
 
 .toggleGrades
+  font-size: 30px
   background: none
   border: none
-  color: #bfbfbf
+  color: $icon_gray
   &:hover
     color: black
 

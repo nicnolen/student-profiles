@@ -162,7 +162,7 @@ const SearchBar = () => {
                     '%'}
                   {allGrades
                     ? student.grades.map((grade, index) => (
-                        <li className="li" key={grade.id}>
+                        <li className="li" key={student.id}>
                           Test {index + 1}: {grade}%
                         </li>
                       ))

@@ -8,7 +8,7 @@ const SearchBar = () => {
   const [filterStudents, setFilterStudents] = useState([]);
   const [input, setInput] = useState('');
   const [tagSearch, setTagSearch] = useState([]);
-  const [allGrades, setAllGrades] = useState(false);
+  const [allGrades, setAllGrades] = useState([]);
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState('');
 
@@ -83,8 +83,6 @@ const SearchBar = () => {
     setFilterStudents(filteredStudentsByNameAndTag);
   }, [students, input, tags, tagSearch]);
 
-  // console.log(filterStudents);
-
   // const filterTags = event => {
   //   // setTagSearch(event.target.value);
   //   if (students.tags) {
@@ -103,7 +101,7 @@ const SearchBar = () => {
       const newTagArr = [...tags, { studentId, value: event.target.value }];
 
       setTags(newTagArr);
-      console.log(newTagArr);
+      // console.log(newTagArr);
       // Clear the input
       setTagInput('');
 
@@ -111,9 +109,16 @@ const SearchBar = () => {
     }
   };
 
-  const toggle = () => {
-    setAllGrades(!allGrades);
-  };
+  console.log(allGrades);
+  const toggle= (studentId) => {
+    if (allGrades.includes(studentId)) {
+     setAllGrades(allGrades.filter(id => id !== studentId))
+    } else {
+     let newOpen = [...allGrades]
+     newOpen.push(studentId)
+     setAllGrades(newOpen)
+    }
+  }
 
   return (
     <div>
@@ -154,19 +159,21 @@ const SearchBar = () => {
                 <p className="studentInfo">Email: {student.email}</p>
                 <p className="studentInfo">Company: {student.company}</p>
                 <p className="studentInfo">Skill: {student.skill}</p>
-                <p className="studentInfo studentGrades">
+                <p className="studentInfo">
                   Average:
                   {' ' +
                     student.grades.reduce((a, b) => parseInt(b) + a, 0) /
                       student.grades.map(grade => grade).length +
                     '%'}
-                  {allGrades
-                    ? student.grades.map((grade, index) => (
-                        <li className="li" key={student.id}>
+                  {allGrades.includes(student.id) ? (
+                    <ul className="studentGrades">
+                      {student.grades.map((grade, index) => (
+                        <li  key={grade.id}>
                           Test {index + 1}: {grade}%
                         </li>
-                      ))
-                    : null}
+                      ))}
+                    </ul>
+                  ) : null}
                 </p>
                 <Tag
                   onChange={event => setTagInput(event.target.value)}
@@ -178,8 +185,10 @@ const SearchBar = () => {
               </div>
             </div>
             <div className="right">
-              <button onClick={toggle} className="toggleGrades">
-                {allGrades ? (
+              <button
+                onClick={() => toggle(student.id)}
+                className="toggleGrades">
+                {allGrades.includes(student.id) ? (
                   <FontAwesomeIcon icon={faMinus} />
                 ) : (
                   <FontAwesomeIcon icon={faPlus} />

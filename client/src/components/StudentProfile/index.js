@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
-import Tag from '../Tag/input';
+import TagInput from '../TagInput/input';
 
 const SearchBar = ({ student }) => {
   const [allGrades, setAllGrades] = useState([]);
@@ -61,9 +61,18 @@ const SearchBar = ({ student }) => {
             ) : null}
           </p>
 
-          <div className="tagContainer">
-            {student.tags.length > 0 && <p className="tag">{student.tags}</p>}
-            <Tag
+          <div className="studentInfo">
+            {student.tags.length > 0 && (
+              <ul className="tagContainer">
+                {student.tags.map((tag, index) => (
+                  <li key={index} className="tag">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <TagInput
               onChange={event => setTagInput(event.target.value)}
               onKeyPress={onKeyPress}
               tags={tags}

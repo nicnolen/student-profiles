@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Tag = ({ student, tagInput, tags, onChange, onKeyPress }) => {
+const Tag = ({ tagInput, tags, onChange, onKeyPress }) => {
   return (
-    <div>
+    <>
       {tags.length > 0 && (
         <ul className="tagContainer">
           {tags.map((tag, index) => (
@@ -12,6 +12,7 @@ const Tag = ({ student, tagInput, tags, onChange, onKeyPress }) => {
           ))}
         </ul>
       )}
+
       <input
         type="text"
         value={tagInput}
@@ -20,7 +21,7 @@ const Tag = ({ student, tagInput, tags, onChange, onKeyPress }) => {
         onChange={onChange}
         className="studentInfo tagInput"
       />
-    </div>
+    </>
   );
 };
 

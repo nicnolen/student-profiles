@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
@@ -61,13 +61,15 @@ const SearchBar = ({ student }) => {
               </ul>
             ) : null}
           </p>
-
-          <Tag
-            onChange={event => setTagInput(event.target.value)}
-            onKeyPress={onKeyPress}
-            tags={tags}
-            tagInput={tagInput}
-          />
+          <p className="studentInfo">{student.tags}</p>
+          <div>
+            <Tag
+              onChange={event => setTagInput(event.target.value)}
+              onKeyPress={onKeyPress}
+              tags={tags}
+              tagInput={tagInput}
+            />
+          </div>
         </div>
       </div>
       <div className="right">

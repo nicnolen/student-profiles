@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import UseFetch from '../UseFetch/index';
 import Tag from '../Tag/input';
 
 const SearchBar = () => {
-  const [students, setStudents] = useState([]);
+  const [students] = UseFetch('https://api.hatchways.io/assessment/students');
   const [filterStudents, setFilterStudents] = useState([]);
   const [input, setInput] = useState('');
   const [tagSearch, setTagSearch] = useState([]);
@@ -12,55 +13,7 @@ const SearchBar = () => {
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState('');
 
-  const studentsUrl = 'https://api.hatchways.io/assessment/students';
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(studentsUrl);
-      if (!response.ok) {
-        throw new Error('Data was unable to be fetched.');
-      }
-      const data = await response.json();
-      setStudents(data.students);
-    } catch (error) {
-      setStudents({ errorMessage: error.toString() });
-      console.error('Error fetching data', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const handleTagAdded = (tag, studentId) => {
-    setStudents(prevStudents => {
-      studentId = studentId - 1;
-      // We copy object here as the student we're accessing
-      // is an object, and objects are always stored by reference.
-      // If we didn't do this, we would be directly mutating
-      // the student at the index, which is bad practice
-      const changedStudent = { ...prevStudents[studentId] };
-      // console.log(changedStudent);
-      // Check if student has 'tags` and add it if it doesn't.
-      if (!(tags in changedStudent)) {
-        changedStudent.tags = [];
-      }
-
-      // Add new tag to array
-      changedStudent.tags.push(tag);
-      // console.log(changedStudent.tags);
-
-      // Copy array so we can change it
-      const mutableStudents = [...prevStudents];
-      mutableStudents[studentId] = changedStudent;
-      // console.log(mutableStudents[studentId]);
-
-      // The state will be set to this array with the student
-      // at the index we were given changed
-      return mutableStudents;
-    });
-  };
-
+  console.log(students)
   useEffect(() => {
     // Array.filter() is perfect for this situation //
     const filteredStudentsByNameAndTag = students.filter(student => {
@@ -69,13 +22,13 @@ const SearchBar = () => {
       const fullName = firstName + ' ' + lastName;
       const studentTags = [];
 
-      if (tags in student) {
-        const filterTags = student.tags.filter(tag => {
-          // console.log(tags);
-          tag.includes(tagSearch.toLowerCase());
-        });
-        studentTags.push(filterTags);
-      }
+      // if (tags in student) {
+      //   const filterTags = student.tags.filter(tag => {
+      //     // console.log(tags);
+      //     tag.includes(tagSearch.toLowerCase());
+      //   });
+      //   studentTags.push(filterTags);
+      // }
 
       return fullName.includes(input.toLowerCase());
     });
@@ -138,7 +91,7 @@ const SearchBar = () => {
         }}
         className="tagSearchInput"
       />
-      {filterStudents.map(student => {
+      {filterStudents && filterStudents.map(student => {
         return (
           <div className="container" key={student.id}>
             <figure className="studentPic">

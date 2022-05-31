@@ -1,12 +1,12 @@
 import React from 'react';
 import './assets/sass/index.sass';
-import SearchBar from './components/SearchBar/index';
+import StudentProfile from './components/StudentProfile/index';
 
 function App() {
   return (
-    <div>
-      <SearchBar />
-    </div>
+    <>
+      <StudentProfile />
+    </>
   );
 }
 

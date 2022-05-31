@@ -21,6 +21,7 @@ const SearchBar = () => {
           return student;
         } else if (
           student.tags.filter(tag => tag.toLowerCase().includes(tagSearch))
+            .length > 1
         ) {
           return student;
         }

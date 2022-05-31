@@ -6,6 +6,7 @@
   "scripts": {
     "start": "cd client && npm start",
     "install": "cd client && npm i",
+    "test": "cd client && npm run test",
     "build": "cd client && npm run build"
   },
   "repository": {

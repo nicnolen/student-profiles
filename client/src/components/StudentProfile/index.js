@@ -4,7 +4,7 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 import TagInput from '../TagInput/input';
 
-const SearchBar = ({ student }) => {
+const StudentProfile = ({ student }) => {
   const [allGrades, setAllGrades] = useState([]);
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState('');
@@ -94,4 +94,4 @@ const SearchBar = ({ student }) => {
   );
 };
 
-export default SearchBar;
+export default StudentProfile;

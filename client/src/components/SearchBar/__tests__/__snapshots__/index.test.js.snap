@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar component matches snapshot DOM node structure 1`] = `
+<DocumentFragment>
+  <div>
+    <input
+      class="nameSearchInput"
+      placeholder="Search by name"
+      type="text"
+    />
+    <input
+      class="tagSearchInput"
+      placeholder="Search by tag"
+      type="text"
+    />
+  </div>
+  <div />
+</DocumentFragment>
+`;
